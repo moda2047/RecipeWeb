@@ -1,0 +1,32 @@
+/* Mypage.css */
+
+.Mypage-container {
+  width: 300px;
+  margin: 0 auto;
+  margin-top: 100px;
+  padding: 20px;
+  border: 2px solid #ccc;
+  border-radius: 5px;
+}
+
+.Mypage-container div {
+  margin-bottom: 10px;
+}
+
+.Mypage-container label {
+  font-weight: bold;
+}
+
+.Mypage-container span {
+  margin-left: 10px;
+}
+.MypageBtn {
+  width: 100px;
+  margin-left: 20px;
+}
+.MypageBthDiv {
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

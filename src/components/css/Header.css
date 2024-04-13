@@ -1,0 +1,35 @@
+/* Header.css */
+
+.header {
+  background-color: #333;
+  color: #fff;
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  margin: 0;
+}
+.nav {
+  display: flex;
+}
+
+.nav div {
+  cursor: pointer;
+  color: #fff;
+  text-decoration: none;
+  margin-left: 20px;
+}
+
+.nav a {
+  color: #fff;
+  text-decoration: none;
+  margin-left: 20px;
+}
+
+.nav a:hover,
+.nav div:hover {
+  text-decoration: underline;
+}
