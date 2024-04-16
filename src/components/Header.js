@@ -23,6 +23,7 @@ const Header = () => {
         window.alert("로그아웃이 완료되었습니다.");
         console.log(response);
         removeCookie("loggedIn");
+        navigate("/");
       })
       .catch((error) => {
         window.alert("로그아웃 중 오류가 발생했습니다.");

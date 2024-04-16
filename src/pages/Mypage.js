@@ -57,6 +57,10 @@ const Mypage = () => {
     }
   };
 
+  const goUpdate = () => {
+    navigate("/UpdateMember");
+  };
+
   if (loading) return <div className="Mypage-container">Loading...</div>;
   if (error) return <div className="Mypage-container">Error: {error}</div>;
 
@@ -78,8 +82,11 @@ const Mypage = () => {
         <label>Phone:</label>
         <span>{memberInfo.phone}</span>
       </div>
+
       <div className="MypageBthDiv">
-        <button className="MypageBtn">수정</button>
+        <button className="MypageBtn" onClick={goUpdate}>
+          수정
+        </button>
         <button className="MypageBtn" onClick={deleteMember}>
           탈퇴
         </button>

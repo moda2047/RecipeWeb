@@ -1,0 +1,50 @@
+.MainGrid {
+  display: grid;
+  grid-template-columns: 3fr 1fr; /* 2대1 비율 */
+  height: 80vh;
+  margin-top: 20px;
+}
+
+.Recipe {
+  background-color: #f0f0f0;
+  padding: 20px;
+}
+
+.IngredientPart {
+  background-color: #e0e0e0;
+  padding: 20px;
+  border: 1px solid red;
+  width: 300px;
+  height: 400px;
+  margin: 0 auto;
+  border-radius: 15px;
+}
+
+.IngredientInputContainer {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.IngredientInput {
+  flex: 1;
+  padding: 8px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  margin-right: 10px;
+}
+
+.IngredientAddButton {
+  /* padding: 2px 4px; */
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  width: 50px;
+  height: 30px;
+}
+
+.AddButton:hover {
+  background-color: #45a049;
+}
