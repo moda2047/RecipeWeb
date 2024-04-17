@@ -3,12 +3,17 @@ import "./css/MainPage.css";
 import axios from "axios";
 import Ingredient from "../components/Ingredient";
 import { useCookies } from "react-cookie";
+import Recipe from "../components/Recipe";
 
 const MainPage = () => {
   const [newIngredient, setNewIngredient] = useState("");
   const [originIngredients, setOriginIngredients] = useState([]);
   const [addTrue, setAddTrue] = useState(false);
   const [cookies, setCookie, removeCookie] = useCookies(["loggedIn"]);
+  const [recipeList, setRecipeList] = useState([]);
+  const [currentPage, setCurrentPage] = useState(0);
+  const [isFirstPage, setIsFirstPage] = useState(true);
+  const [isLastPage, setIsLastPage] = useState(false);
   const getIngredients = async () => {
     const url = "http://localhost:8080/member/ingredients";
 
@@ -28,7 +33,7 @@ const MainPage = () => {
 
   useEffect(() => {
     getIngredients();
-    console.log("useEffect");
+    console.log("useEffectgetIngredients");
   }, [addTrue]);
   useEffect(() => {
     setOriginIngredients([]);
@@ -84,10 +89,65 @@ const MainPage = () => {
       console.error("재료를 수정하는 중 오류가 발생했습니다.", error);
     }
   };
+  const getRecipeList = async () => {
+    const url = "http://localhost:8080/recipe/list";
+    const params = { page: currentPage, size: 4 }; // 쿼리 파라미터 설정
 
+    try {
+      const response = await axios.get(url, { params, withCredentials: true });
+      if (response.data.result) {
+        const responseData = response.data.data;
+        console.log("레시피가 성공적으로 조회되었습니다.");
+        console.log(responseData);
+        setRecipeList(responseData.content);
+        setIsFirstPage(responseData.first);
+        setIsLastPage(responseData.last);
+      } else {
+        console.error("오류가 발생했습니다.");
+      }
+    } catch (error) {
+      console.error("레시피 조회 중 오류가 발생했습니다.", error);
+    }
+  };
+  useEffect(() => {
+    getRecipeList();
+  }, [currentPage]);
+
+  const handleNextPage = () => {
+    setCurrentPage(currentPage + 1);
+  };
+
+  const handlePreviousPage = () => {
+    if (currentPage > 0) {
+      setCurrentPage(currentPage - 1);
+    }
+  };
   return (
     <div className="MainGrid">
-      <div className="Recipe">레시피</div>
+      <div>
+        <div className="Recipe">
+          {recipeList.map((recipe) => (
+            <Recipe
+              key={recipe.id}
+              id={recipe.id}
+              image={recipe.imageS}
+              name={recipe.name}
+              hashtags={recipe.hashTag}
+              cookType={recipe.cookType}
+            />
+          ))}
+        </div>
+        <div className="Pagination">
+          <button onClick={handlePreviousPage} disabled={isFirstPage}>
+            Previous
+          </button>
+          <span>{currentPage + 1}</span>
+          <button onClick={handleNextPage} disabled={isLastPage}>
+            Next
+          </button>
+        </div>
+      </div>
+
       <div className="IngredientPart">
         <div className="IngredientInputContainer">
           <input

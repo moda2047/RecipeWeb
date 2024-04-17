@@ -7,6 +7,8 @@ import Header from "./components/Header";
 import Mypage from "./pages/Mypage";
 import UpdatePage from "./pages/UpdatePage";
 import Ingredient from "./components/Ingredient";
+import Recipe from "./components/Recipe";
+import RecipeDetail from "./pages/RecipeDetail";
 
 function App() {
   return (
@@ -19,6 +21,8 @@ function App() {
         <Route path="/Mypage" element={<Mypage />}></Route>
         <Route path="/ingredient" element={<Ingredient />}></Route>
         <Route path="/UpdateMember" element={<UpdatePage />}></Route>
+        <Route path="/Recipe" element={<Recipe />}></Route>
+        <Route path="/RecipeDetail" element={<RecipeDetail />}></Route>
       </Routes>
     </BrowserRouter>
   );
