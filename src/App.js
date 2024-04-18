@@ -9,6 +9,7 @@ import UpdatePage from "./pages/UpdatePage";
 import Ingredient from "./components/Ingredient";
 import Recipe from "./components/Recipe";
 import RecipeDetail from "./pages/RecipeDetail";
+import RecipeSearch from "./pages/RecipeSearch";
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
         <Route path="/UpdateMember" element={<UpdatePage />}></Route>
         <Route path="/Recipe" element={<Recipe />}></Route>
         <Route path="/RecipeDetail" element={<RecipeDetail />}></Route>
+        <Route path="/RecipeSearch" element={<RecipeSearch />}></Route>
       </Routes>
     </BrowserRouter>
   );

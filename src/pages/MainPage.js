@@ -4,6 +4,7 @@ import axios from "axios";
 import Ingredient from "../components/Ingredient";
 import { useCookies } from "react-cookie";
 import Recipe from "../components/Recipe";
+import { useNavigate } from "react-router-dom";
 
 const MainPage = () => {
   const [newIngredient, setNewIngredient] = useState("");
@@ -14,6 +15,9 @@ const MainPage = () => {
   const [currentPage, setCurrentPage] = useState(0);
   const [isFirstPage, setIsFirstPage] = useState(true);
   const [isLastPage, setIsLastPage] = useState(false);
+  const [searchRecipe, setSearchRecipe] = useState([]);
+  const navigate = useNavigate();
+
   const getIngredients = async () => {
     const url = "http://localhost:8080/member/ingredients";
 
@@ -122,6 +126,31 @@ const MainPage = () => {
       setCurrentPage(currentPage - 1);
     }
   };
+  const handleSearchRecipe = async () => {
+    const url = "http://localhost:8080/recipe/filter";
+    const data = {
+      ingredients: originIngredients.map(
+        (ingredient) => ingredient.ingredientName
+      ),
+    };
+
+    try {
+      const response = await axios.post(url, data, { withCredentials: true });
+      if (response.data.result) {
+        console.log(response.data.data);
+        setSearchRecipe(response.data.data);
+        console.log("검색레시피" + searchRecipe);
+        navigate("/RecipeSearch", {
+          state: { searchRecipe: response.data.data },
+        });
+      } else {
+        console.error("오류가 생겼습니다");
+      }
+    } catch (error) {
+      console.error("레시피를 검색하는 중 오류가 발생했습니다.", error);
+    }
+  };
+
   return (
     <div className="MainGrid">
       <div>
@@ -170,6 +199,9 @@ const MainPage = () => {
             }
           />
         ))}
+        <button className="IngredientAddButton" onClick={handleSearchRecipe}>
+          검색
+        </button>
       </div>
     </div>
   );
