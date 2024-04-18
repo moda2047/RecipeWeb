@@ -9,7 +9,8 @@ const Mypage = () => {
   const [memberInfo, setMemberInfo] = useState({});
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [cookies, setCookie, removeAllCookies] = useCookies();
+  const [cookies1, setCookie1, removeCookie1] = useCookies(["JSESSIONID"]);
+  const [cookies2, setCookie2, removeCookie2] = useCookies(["loggedIn"]);
   useEffect(() => {
     getMember();
   }, []);
@@ -43,7 +44,9 @@ const Mypage = () => {
       if (response.data.result) {
         console.log("사용자 정보를 가져오기 완료되었습니다.");
         setMemberInfo("");
-        removeAllCookies();
+
+        removeCookie1("JSESSIONID");
+        removeCookie2("loggedIn");
         navigate("/");
       } else {
         console.log("오류가 생겼습니다");
